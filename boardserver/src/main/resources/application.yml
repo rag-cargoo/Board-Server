@@ -1,0 +1,10 @@
+# Default profile (local)
+spring:
+  application:
+    name: boardserver
+  profiles:
+    default: local
+mybatis:
+  mapper-locations: classpath*:/mapper/**/*.xml
+  configuration:
+    map-underscore-to-camel-case: true

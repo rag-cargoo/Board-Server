@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.boardserver.mapper.UserProfileMapper">
+
+    <resultMap id="UserProfileResultMap" type="com.example.boardserver.dto.UserDTO">
+        <id column="id" property="userId" />
+        <result column="password" property="password" />
+        <result column="name" property="name" />
+        <result column="email" property="email" />
+        <result column="phone" property="phone" />
+        <result column="address" property="address" />
+        <result column="is_admin" property="admin" />
+        <result column="create_time" property="createTime" />
+        <result column="update_time" property="updateTime" />
+    </resultMap>
+
+    <select id="getUserProfile" parameterType="string" resultMap="UserProfileResultMap">
+        SELECT
+            id,
+            password,
+            name,
+            email,
+            phone,
+            address,
+            is_admin,
+            create_time,
+            update_time
+        FROM user_profiles
+        WHERE id = #{userId}
+    </select>
+
+    <insert id="insertUserProfile" parameterType="com.example.boardserver.dto.UserDTO">
+        INSERT INTO user_profiles (id, password, name, email, phone, address, is_admin, create_time, update_time)
+        VALUES (#{userId}, #{password}, #{name}, #{email}, #{phone}, #{address}, #{admin}, #{createTime}, #{updateTime})
+    </insert>
+
+    <delete id="deleteUserProfile" parameterType="string">
+        DELETE FROM user_profiles WHERE id = #{userId}
+    </delete>
+
+    <select id="findByIdAndPassword" parameterType="map" resultMap="UserProfileResultMap">
+        SELECT
+            id,
+            password,
+            name,
+            email,
+            phone,
+            address,
+            is_admin,
+            create_time,
+            update_time
+        FROM user_profiles
+        WHERE id = #{userId}
+          AND password = #{password}
+    </select>
+
+    <select id="idCheck" parameterType="string" resultType="int">
+        SELECT COUNT(*) FROM user_profiles WHERE id = #{userId}
+    </select>
+
+    <update id="updatePassword" parameterType="map">
+        UPDATE user_profiles SET password = #{password} WHERE id = #{userId}
+    </update>
+
+    <update id="updateAddress" parameterType="com.example.boardserver.dto.UserDTO">
+        UPDATE user_profiles
+        SET address = #{address},
+            update_time = #{updateTime}
+        WHERE id = #{userId}
+    </update>
+
+</mapper>
