@@ -1,6 +1,3 @@
-[submodule "Board-Server-lab"]
-	path = Board-Server-lab
-	url = https://github.com/rag-cargoo/Board-Server-lab.git
 [submodule "Board-Server-Locust"]
 	path = Board-Server-Locust
 	url = https://github.com/ccommit-dev/Board-Server-Locust.git
