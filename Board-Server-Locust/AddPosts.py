@@ -5,6 +5,7 @@ import random
 class AddPosts(HttpUser):
     wait_time = between(1, 2)
 
+    #  로그인 세션 유지
     def on_start(self):
         self.client.post("/users/sign-in", json={"userId": "topojs9",
                                                  "password": "123"})
